@@ -8,7 +8,7 @@ const AddedFeature = (props) => {
       {/* Add an onClick to run a function to remove a feature */}
       <button
         className="button"
-        onClick={() => props.deleteFeature(props.feature.id)}
+        onClick={() => props.deleteFeature(props.feature)}
       >
         X
       </button>

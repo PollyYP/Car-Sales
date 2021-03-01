@@ -18,12 +18,16 @@ const initialState = {
 export const featuresReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_FEATURES":
+      const total = state.car.features.reduce(
+        (acc, val) => acc + val.price,
+        action.payload.price
+      );
       return {
         ...state,
-        //additionalPrice: action.payload.price,
+        additionalPrice: total,
         car: {
           ...state.car,
-          price: state.car.price + action.payload.price,
+          //price: state.car.price + action.payload.price,
           features: [...state.car.features, action.payload],
         },
       };
@@ -31,10 +35,13 @@ export const featuresReducer = (state = initialState, action) => {
     case "DELETE_FEATURE":
       return {
         ...state,
+        additionalPrice: state.additionalPrice - action.payload.price,
         car: {
           ...state.car,
           features: [
-            ...state.car.features.filter((item) => item.id !== action.payload),
+            ...state.car.features.filter(
+              (item) => item.id !== action.payload.id
+            ),
           ],
         },
       };
@@ -43,6 +50,3 @@ export const featuresReducer = (state = initialState, action) => {
       return state;
   }
 };
-
-// state.car.features.forEach((item) => {
-//   if (!item.includes(action.payload)) {
