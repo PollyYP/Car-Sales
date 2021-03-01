@@ -22,12 +22,10 @@ export const featuresReducer = (state = initialState, action) => {
         ...state,
         car: {
           ...state.car,
-          features: [
-            ...state.car.features,
-            state.car.features.push(action.payload),
-          ],
+          price: state.car.price + action.payload.price,
+          features: [...state.car.features, action.payload],
         },
-        additionalPrice: state.car.price + action.payload.price,
+        //additionalPrice: state.car.price + action.payload.price,
       };
 
     case "DELETE_FEATURE":
